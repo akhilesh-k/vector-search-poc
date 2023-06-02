@@ -1,3 +1,4 @@
 .vscode/
 data_encoder/__pycache__/
 data_encoder/data/
+.DS_Store
