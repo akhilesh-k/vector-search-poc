@@ -10,10 +10,11 @@ from transformers import CLIPTokenizer
 import torch
 import clip
 from tqdm import tqdm
+import text_preprocessor
 
 PATH_PRODUCTS_DATASET = "data_encoder/data"
 # Name of the zip file (without .zip extension)
-NAME_DATASET = "data-3.json"
+NAME_DATASET = "data-8.json"
 PATH_PRODUCTS_MODEL = "all-MiniLM-L6-v2"
 
 # Load the CLIP model
@@ -29,8 +30,10 @@ def load_products_dataset():
 
 
 def get_product_sentence(model, product):
+    color = text_preprocessor.process_colors(
+        product.get('colorShade'), product.get('colorList'))
     fields = [product.get('nameSearch'), product.get('merchantName'),
-              product.get('brand'), product.get('city')]
+              product.get('brand'), product.get('city'), text_preprocessor.process_string(product.get('uniqueSellingPoint')), color]
     if fields[0] is None:
         fields[0] = product.get('name')
     non_empty_fields = [field for field in fields if field is not None]
@@ -42,8 +45,7 @@ def get_product_sentence(model, product):
 
 
 def get_products_sentences(model, products_dataset):
-    return [get_product_sentence(model, product) for product in products_dataset]
-
+    return [get_product_sentence(model, product) for product in tqdm(products_dataset, desc="Calculating product vectors")]
 
 def get_product_image(product):
     product_img = f"{(product['mediumImage'])}"
