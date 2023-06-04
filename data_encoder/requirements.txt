@@ -5,3 +5,4 @@ pillow
 bs4
 tqdm
 nltk
+pysolr

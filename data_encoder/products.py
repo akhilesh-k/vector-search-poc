@@ -14,7 +14,7 @@ import text_preprocessor
 
 PATH_PRODUCTS_DATASET = "data_encoder/data"
 # Name of the zip file (without .zip extension)
-NAME_DATASET = "data-8.json"
+NAME_DATASET = "data-1.json"
 PATH_PRODUCTS_MODEL = "all-MiniLM-L6-v2"
 
 # Load the CLIP model
