@@ -4,3 +4,4 @@ data_encoder/data/
 **/.DS_Store
 data_encoder/data/inflated_data/
 **/*.env
+solr/conf/
